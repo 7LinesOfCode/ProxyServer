@@ -4,7 +4,14 @@ const router = express.Router();
 
 router.get("/api/meteors", async (req, res) => {
   try {
-    const meteors = await formatMeteors();
+    const { startDate, endDate, count, wereDangerousMeteors } = req.query;
+
+    const meteors = await formatMeteors(
+      startDate,
+      endDate,
+      Boolean(count),
+      Boolean(wereDangerousMeteors)
+    );
     res.json(meteors);
   } catch (error) {
     console.error("Error fetching meteors data:", error);

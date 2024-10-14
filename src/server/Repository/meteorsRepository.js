@@ -5,14 +5,13 @@ dotenv.config();
 const apiBaseUrl = process.env.NASA_API_URL;
 const apiKey = process.env.NASA_API_KEY;
 
-const url = `${apiBaseUrl}?start_date=2024-10-07&api_key=${apiKey}`;
-
-export const getMeteors = async () => {
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching meteors data:", error);
-    throw error;
-  }
+export const getMeteors = async (startDate, endDate) => {
+  const url = `${apiBaseUrl}?api_key=${apiKey}`;
+  const response = await axios.get(url, {
+    params: {
+      startDate,
+      endDate,
+    },
+  });
+  return response.data;
 };
