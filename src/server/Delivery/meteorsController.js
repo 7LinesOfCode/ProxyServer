@@ -1,5 +1,6 @@
 import express from "express";
 import { formatMeteors } from "../UseCases/meteorsServices.js";
+
 const router = express.Router();
 
 router.get("/api/meteors", async (req, res) => {
@@ -12,7 +13,12 @@ router.get("/api/meteors", async (req, res) => {
       Boolean(count),
       Boolean(wereDangerousMeteors)
     );
-    res.json(meteors);
+
+    if (req.headers["accept"].includes("text/html")) {
+      res.render("meteorsView.njk", meteors);
+    } else {
+      res.json(meteors);
+    }
   } catch (error) {
     console.error("Error fetching meteors data:", error);
     res.status(500).json({ message: "Error during getting a response." });

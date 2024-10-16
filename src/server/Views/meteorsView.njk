@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metors</title>
+</head>
+<body>
+    <h1>Data from Service</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Diameter (meters)</th>
+            <th>Potentially Hazardous</th>
+            <th>Close Approach Date</th>
+            <th>Relative Velocity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for meteor in data %}
+        <tr>
+            <td>{{ meteor.id }}</td>
+            <td>{{ meteor.name }}</td>
+            <td>{{ meteor.meters_diameter }}</td>
+            <td>{{ meteor.is_potentially_hazardous_asteroid }}</td>
+            <td>{{ meteor.close_approach_date_full }}</td>
+            <td>{{ meteor.relative_velocity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
