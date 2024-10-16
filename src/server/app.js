@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import meteorsController from "./Delivery/meteorsController.js";
+import roversController from "./Delivery/roversController.js";
 import nunjucks from "nunjucks";
 
 dotenv.config();
@@ -8,7 +9,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(express.json());
 app.use(meteorsController);
+app.use(roversController);
 
 nunjucks.configure("Views", {
   autoescape: true,
