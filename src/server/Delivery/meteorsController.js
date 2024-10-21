@@ -1,9 +1,11 @@
 import express from "express";
-import { formatMeteors } from "../UseCases/meteorsServices.js";
+import { meteorsValidator } from "../Validators/meteorValidator.js";
+import { formatMeteors } from "../Services/meteorsServices.js";
+import { validate } from "../Middleware/validationHandler.js";
 
 const router = express.Router();
 
-router.get("/api/meteors", async (req, res) => {
+router.get("/api/meteors", validate(meteorsValidator), async (req, res) => {
   try {
     const { startDate, endDate, count, wereDangerousMeteors } = req.query;
 

@@ -1,12 +1,14 @@
 import express from "express";
-import { GetRoverPhoto } from "../UseCases/roversServices.js";
+import { GetRoverPhoto } from "../Services/roversServices.js";
+import { roversValidator } from "../Validators/roverValidator.js";
+import { validate } from "../Middleware/validationHandler.js";
 
 const router = express.Router();
 
-router.post("/api/rover", async (req, res) => {
+router.post("/api/rover", validate(roversValidator), async (req, res) => {
   try {
     console.log(req.body);
-    const { id, name, api_key } = req.body;
+    const { id, name, apiKey } = req.body;
 
     const roverPicture = await GetRoverPhoto(id, name, api_key);
 
